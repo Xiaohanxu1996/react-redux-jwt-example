@@ -1,0 +1,12 @@
+{
+    "parser": "babel-eslint",
+    "extends": "airbnb",
+    "globals": {
+        "fetch": true,
+        "localStorage": true,
+        "document": true
+    },
+    "rules": {
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+      }
+}
