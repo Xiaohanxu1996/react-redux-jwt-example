@@ -8,6 +8,12 @@ import alertActions from './components/Alert/action';
 import HomePage from './pages/HomePage/HomePage';
 import LoginPage from './pages/LoginPage/LoginPage';
 
+function handleRedirect() {
+  if (localStorage.getItem('user')) {
+    return <HomePage />;
+  }
+  return <Redirect to={{ pathname: '/login', state: { from: history.location } }} />;
+}
 class App extends Component {
   static defaultProps = {
     alert: {},
@@ -22,12 +28,7 @@ class App extends Component {
       this.props.clear();
     });
   }
-  handleRedirect() {
-    if (localStorage.getItem('user')) {
-      return <HomePage />;
-    }
-    return <Redirect to={{ pathname: '/login', state: { from: history.location} }} />;
-  }
+
   render() {
     const { alert } = this.props;
     return (
@@ -40,7 +41,7 @@ class App extends Component {
             }
             <Router history={history}>
               <Switch >
-                <Route exact path="/" render={this.handleRedirect} />
+                <Route exact path="/" render={handleRedirect} />
                 <Route path="/login" component={LoginPage} />
               </Switch>
             </Router>
